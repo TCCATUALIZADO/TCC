@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Login - Sistema de Almoxarifado</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='codigos/style.css') }}">
+</head>
+<body>
+    <!-- Barra Superior -->
+    <header class="top-bar">
+        <div class="logo-container">
+            <img src="{{ url_for('static', filename='codigos/img1/logo.png') }}" alt="Logo" class="logo">
+            <div class="logo-text">
+                <h2>Almoxarifado</h2>
+                <span>senai</span>
+            </div>
+        </div>
+        <a href="{{ url_for('home') }}" class="botao">Cadastre-se</a>
+    </header>
+
+    <!-- Área Principal de Login -->
+    <main class="login-main">
+        <div class="login-card">
+            <div class="card-header">
+                <h1 class="texto">Sistema de</h1>
+                <h2 class="texto2">Almoxarifado</h2>
+            </div>
+
+            <!-- Campo de Login -->
+            <div class="form-group">
+                <label for="login" class="form-label">Usuário</label>
+                <div class="input-icon-wrapper">
+                    <span class="input-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+                    <input 
+                        type="text" 
+                        placeholder="Digite seu usuário" 
+                        class="login" 
+                        id="login"
+                        autocomplete="username"
+                        onkeypress="if(event.key === 'Enter') verificarLogin();"
+                        required
+                    >
+                </div>
+            </div>
+
+            <!-- Campo de Senha -->
+            <div class="form-group">
+                <label for="senha" class="form-label">Senha</label>
+                <div class="campo-senha">
+                    <div class="input-icon-wrapper">
+                        <span class="input-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+                        <input 
+                            type="password" 
+                            placeholder="Digite sua senha" 
+                            class="senha" 
+                            id="senha"
+                            autocomplete="current-password"
+                            onkeypress="if(event.key === 'Enter') verificarLogin();"
+                            required
+                        >
+                    </div>
+                    <button 
+                        type="button" 
+                        class="btn-toggle-senha" 
+                        id="btnOlho" 
+                        onclick="toggleSenha()" 
+                        title="Mostrar ou ocultar senha"
+                        aria-label="Mostrar ou ocultar senha"
+                    ><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+                </div>
+            </div>
+
+            <!-- Botão Entrar -->
+            <button type="button" class="botao2" onclick="verificarLogin()">
+                <span>Entrar</span> ➔
+            </button>
+
+            <!-- Rodapé do Card -->
+            <div class="card-footer">
+                <p>Ainda não tem conta? <a href="{{ url_for('home') }}">Cadastre-se aqui</a></p>
+            </div>
+        </div>
+    </main>
+
+    <script src="{{ url_for('static', filename='script2.js') }}"></script>
+    <script>
+        var iconeOlhoAberto = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>';
+        var iconeOlhoFechado = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>';
+
+        function toggleSenha() {
+            var senhaInput = document.getElementById("senha");
+            var btnOlho = document.getElementById("btnOlho");
+            if (senhaInput.type === "password") {
+                senhaInput.type = "text";
+                btnOlho.innerHTML = iconeOlhoFechado;
+            } else {
+                senhaInput.type = "password";
+                btnOlho.innerHTML = iconeOlhoAberto;
+            }
+        }
+    </script>
+</body>
+</html>

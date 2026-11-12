@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Menu Principal - Sistema de Almoxarifado</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='codigos/style2.css') }}">
+</head>
+<body>
+    <!-- Barra Superior -->
+    <header class="top-bar">
+        <a href="{{ url_for('index') }}" class="voltar">
+            ⬅ Sair
+        </a>
+        <div class="badge-sistema">
+            <span>📦</span> Almoxarifado SENAI
+        </div>
+    </header>
+
+    <!-- Área Central com os Botões de Ação -->
+    <main class="menu-main">
+        <div class="menu-card">
+            <div class="menu-header">
+                <h1>Painel de Controle</h1>
+            </div>
+
+            <div class="menu-grid">
+                <!-- 1. Consultar Estoque Atual -->
+                <a href="{{ url_for('paginaconsulta') }}" class="menu-link">
+                    <button type="button" class="menu-btn consulta1">
+                        <div class="btn-conteudo">
+                            <div class="btn-texto">
+                                <span class="btn-titulo">Consultar Estoque Atual</span>
+                            </div>
+                        </div>
+                        <span class="btn-seta">➔</span>
+                    </button>
+                </a>
+
+                <!-- 2. Inserir Novo Item -->
+                <a href="{{ url_for('paginadonovoitem') }}" class="menu-link">
+                    <button type="button" class="menu-btn consulta2">
+                        <div class="btn-conteudo">
+                            <div class="btn-texto">
+                                <span class="btn-titulo">Inserir Novo Item</span>
+                            </div>
+                        </div>
+                        <span class="btn-seta">➔</span>
+                    </button>
+                </a>
+
+                <!-- 3. Solicitar Entrada -->
+                <a href="{{ url_for('paginadeentrada') }}" class="menu-link">
+                    <button type="button" class="menu-btn consulta3">
+                        <div class="btn-conteudo">
+                            <div class="btn-texto">
+                                <span class="btn-titulo">Solicitar Entrada</span>
+                            </div>
+                        </div>
+                        <span class="btn-seta">➔</span>
+                    </button>
+                </a>
+
+                <!-- 4. Solicitar Saída -->
+                <a href="{{ url_for('paginadesaida') }}" class="menu-link">
+                    <button type="button" class="menu-btn consulta4">
+                        <div class="btn-conteudo">
+                            <div class="btn-texto">
+                                <span class="btn-titulo">Solicitar Saída</span>
+                            </div>
+                        </div>
+                        <span class="btn-seta">➔</span>
+                    </button>
+                </a>
+
+                <!-- 5. Histórico de Movimentações -->
+                <a href="{{ url_for('historico') }}" class="menu-link grid-full">
+                    <button type="button" class="menu-btn consulta5">
+                        <div class="btn-conteudo">
+                            <div class="btn-texto">
+                                <span class="btn-titulo">Histórico de Movimentações</span>
+                            </div>
+                        </div>
+                        <span class="btn-seta">➔</span>
+                    </button>
+                </a>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Cadastro - Gestão de Estoque</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style3.css') }}">
+</head>
+<body>
+    <!-- Barra Superior com botão Voltar -->
+    <header class="top-nav">
+        <a href="{{ url_for('index') }}" class="btn-voltar">
+            ⬅ Voltar ao Login
+        </a>
+    </header>
+
+    <!-- Área Principal de Cadastro -->
+    <main class="cadastro-main">
+        <div class="cadastro-card">
+            <div class="card-header">
+                <span class="card-icon"></span>
+                <h1>Criar Nova Conta</h1>
+            </div>
+
+            <!-- Campo de Usuário -->
+            <div class="form-group">
+                <label for="cadUsuario" class="form-label">Nome de Usuário</label>
+                <div class="input-wrapper">
+                    
+                    <input 
+                        type="text" 
+                        id="cadUsuario" 
+                        name="usuario" 
+                        class="campo-input"
+                        placeholder="Escolha um nome de usuário" 
+                        autocomplete="username"
+                        onkeypress="if(event.key === 'Enter') cadastrarUsuario();"
+                        required
+                    >
+                </div>
+            </div>
+            <!-- Campo de Senha -->
+            <div class="form-group">
+                <label for="cadSenha" class="form-label">Senha</label>
+                <div class="input-wrapper">
+                    
+                    <input 
+                        type="password" 
+                        id="cadSenha" 
+                        name="senha" 
+                        class="campo-input"
+                        placeholder="Digite sua senha" 
+                        autocomplete="new-password"
+                        onkeypress="if(event.key === 'Enter') cadastrarUsuario();"
+                        required
+                    >
+                    <button 
+                        type="button" 
+                        class="btn-toggle" 
+                        onclick="toggleInput('cadSenha', this)" 
+                        title="Mostrar/ocultar senha"
+                        aria-label="Mostrar ou ocultar senha"
+                    >👁</button>
+                </div>
+            </div>
+
+            <!-- Campo de Confirmação de Senha -->
+            <div class="form-group">
+                <label for="cadConfirma" class="form-label">Confirmar Senha</label>
+                <div class="input-wrapper">
+                    
+                    <input 
+                        type="password" 
+                        id="cadConfirma" 
+                        name="confirma_senha" 
+                        class="campo-input"
+                        placeholder="Confirme sua senha" 
+                        autocomplete="new-password"
+                        onkeypress="if(event.key === 'Enter') cadastrarUsuario();"
+                        required
+                    >
+                    <button 
+                        type="button" 
+                        class="btn-toggle" 
+                        onclick="toggleInput('cadConfirma', this)" 
+                        title="Mostrar/ocultar senha"
+                        aria-label="Mostrar ou ocultar confirmação de senha"
+                    >👁</button>
+                </div>
+            </div>
+            <!-- Botão de Cadastrar -->
+            <button type="button" class="btn-cadastrar" onclick="cadastrarUsuario()">
+                <span>Cadastrar Usuário</span> ➔
+            </button>
+
+            <!-- Rodapé do Card -->
+            <div class="card-footer">
+                <p>Já possui cadastro? <a href="{{ url_for('index') }}">Faça login aqui</a></p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function toggleInput(inputId, btn) {
+            var input = document.getElementById(inputId);
+            if (input.type === "password") {
+                input.type = "text";
+                btn.textContent = "X";
+            } else {
+                input.type = "password";
+                btn.textContent = "👁";
+            }
+        }
+
+        async function cadastrarUsuario() {
+            const usuario = document.getElementById("cadUsuario").value.trim();
+            const senha = document.getElementById("cadSenha").value;
+            const confirma = document.getElementById("cadConfirma").value;
+
+            if (!usuario || !senha) {
+                alert("Por favor, preencha todos os campos!");
+                return;
+            }
+
+            if (senha !== confirma) {
+                alert("As senhas não coincidem!");
+                return;
+            }
+
+            try {
+                const resposta = await fetch("/api/cadastro", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ usuario: usuario, senha: senha })
+                });
+
+                const dados = await resposta.json();
+
+                if (dados.sucesso) {
+                    alert("Usuário cadastrado com sucesso! Redirecionando para o login...");
+                    window.location.href = "{{ url_for('index') }}";
+                } else {
+                    alert(dados.mensagem || "Erro ao cadastrar usuário!");
+                }
+            } catch (erro) {
+                console.error("Erro ao cadastrar:", erro);
+                alert("Erro ao conectar com o servidor!");
+            }
+        }
+    </script>
+</body>
+</html>

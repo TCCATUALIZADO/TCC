@@ -1,0 +1,18 @@
+# Node / Expo
+node_modules/
+mobile/node_modules/
+mobile/.expo/
+.npm
+package-lock.json
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+
+# Ambiente e IDEs
+.env
+.vscode/
+.idea/

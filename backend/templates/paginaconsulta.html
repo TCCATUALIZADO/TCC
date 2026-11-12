@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Consulta de Estoque - Almoxarifado</title>
+
+    <style>
+        :root {
+            --primary: #00437e;
+            --primary-hover: #002d54;
+            --success: #28a745;
+            --success-hover: #218838;
+            --danger: #dc3545;
+            --danger-hover: #c82333;
+            --bg-card: rgba(255, 255, 255, 0.97);
+            --border: #e2e8f0;
+            --radius-pill: 50px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-image: url(/static/img/tela1.png);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            min-height: 100vh;
+            min-height: 100dvh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            color: #1e293b;
+        }
+
+        /* Top Navigation Bar */
+        .top-nav {
+            width: 100%;
+            max-width: 1050px;
+            margin: 0 auto 15px auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .voltar {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius-pill);
+            padding: 10px 22px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(0, 67, 126, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .voltar:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 14px rgba(0, 67, 126, 0.4);
+        }
+
+        .badge-nav {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 8px 16px;
+            border-radius: var(--radius-pill);
+            font-weight: 700;
+            font-size: 14px;
+            color: var(--primary);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        /* Container Principal */
+        .container {
+            width: 100%;
+            max-width: 1050px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            padding: 30px;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            flex: 1;
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--primary);
+            margin: 0 0 25px 0;
+            font-size: clamp(22px, 3.5vw, 32px);
+            font-weight: 800;
+        }
+
+        .alerta-erro {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            padding: 12px 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        /* Barra de Ações (Busca e Botões) */
+        .barra-acoes {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 22px;
+        }
+
+        .campo-busca-wrapper {
+            flex: 1;
+            min-width: 260px;
+            position: relative;
+        }
+
+        .campo-busca {
+            width: 100%;
+            padding: 12px 18px 12px 42px;
+            border: 2px solid #cbd5e1;
+            border-radius: var(--radius-pill);
+            font-size: 15px;
+            outline: none;
+            box-sizing: border-box;
+            background: #ffffff;
+            transition: border-color 0.25s, box-shadow 0.25s;
+        }
+
+        .campo-busca:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(0, 67, 126, 0.15);
+        }
+
+        .icone-busca {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 16px;
+            color: #64748b;
+            pointer-events: none;
+        }
+
+        .botoes-grupo {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn-adicionar {
+            background-color: var(--success);
+            color: white;
+            border: none;
+            padding: 11px 20px;
+            border-radius: var(--radius-pill);
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 4px 10px rgba(40, 167, 69, 0.25);
+            transition: all 0.25s ease;
+            white-space: nowrap;
+        }
+
+        .btn-adicionar:hover {
+            background-color: var(--success-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 14px rgba(40, 167, 69, 0.35);
+        }
+
+        .btn-excluir-todos {
+            background-color: var(--danger);
+            color: white;
+            border: none;
+            padding: 11px 20px;
+            border-radius: var(--radius-pill);
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 4px 10px rgba(220, 53, 69, 0.25);
+            transition: all 0.25s ease;
+            white-space: nowrap;
+        }
+
+        .btn-excluir-todos:hover {
+            background-color: var(--danger-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 14px rgba(220, 53, 69, 0.35);
+        }
+
+        /* Tabela Responsiva com Scroll Horizontal */
+        .tabela-container {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--border);
+            background: #ffffff;
+        }
+
+        table {
+            width: 100%;
+            min-width: 650px; /* Garante estrutura limpa em telas menores sem comprimir colunas */
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th, td {
+            padding: 14px 16px;
+            text-align: center;
+            border-bottom: 1px solid #f1f5f9;
+            font-size: 14px;
+        }
+
+        th {
+            background-color: var(--primary);
+            color: white;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+
+        tr:hover {
+            background-color: #f1f5f9;
+        }
+
+        .btn-excluir-item {
+            background-color: var(--danger);
+            color: white;
+            border: none;
+            padding: 7px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .btn-excluir-item:hover {
+            background-color: var(--danger-hover);
+            transform: scale(1.05);
+        }
+
+        .qtd-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: var(--radius-pill);
+            font-weight: 700;
+            font-size: 13px;
+            background-color: #dcfce7;
+            color: #15803d;
+            white-space: nowrap;
+        }
+
+        .qtd-baixa {
+            background-color: #fee2e2;
+            color: #b91c1c;
+        }
+
+        /* Rodapé */
+        .page-footer {
+            width: 100%;
+            max-width: 1050px;
+            margin: 15px auto 0 auto;
+            text-align: center;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+        }
+
+        /* ========================================================
+           MEDIA QUERIES - RESPONSIVIDADE
+           ======================================================== */
+
+        @media (max-width: 768px) {
+            body {
+                padding: 12px;
+            }
+
+            .container {
+                padding: 20px 15px;
+                border-radius: 14px;
+            }
+
+            .barra-acoes {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .campo-busca-wrapper {
+                width: 100%;
+                min-width: 100%;
+            }
+
+            .botoes-grupo {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .btn-adicionar, .btn-excluir-todos {
+                flex: 1;
+                justify-content: center;
+                padding: 10px 12px;
+                font-size: 13px;
+            }
+
+            th, td {
+                padding: 10px 12px;
+                font-size: 13px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 8px;
+            }
+
+            .top-nav {
+                margin-bottom: 10px;
+            }
+
+            .voltar {
+                font-size: 13px;
+                padding: 8px 16px;
+            }
+
+            .badge-nav {
+                display: none;
+            }
+
+            .container {
+                padding: 16px 12px;
+            }
+
+            h1 {
+                font-size: 20px;
+                margin-bottom: 18px;
+            }
+
+            .botoes-grupo {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .btn-adicionar, .btn-excluir-todos {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="top-nav">
+        <a href="{{ url_for('menu') }}" class="voltar">⬅ Voltar ao Menu</a>
+        <div class="badge-nav"> Gestão de Estoque</div>
+    </header>
+
+    <main class="container">
+        <h1>Consulta de Estoque</h1>
+
+        {% if erro %}
+        <div class="alerta-erro">
+            ⚠️ {{ erro }}
+        </div>
+        {% endif %}
+
+        <div class="barra-acoes">
+            <div class="campo-busca-wrapper">
+                <input 
+                    type="text" 
+                    id="campoBusca" 
+                    class="campo-busca" 
+                    onkeyup="filtrarTabela()" 
+                    placeholder="Pesquisar produto por nome ou descrição..."
+                    aria-label="Pesquisar produto"
+                >
+            </div>
+            
+            <div class="botoes-grupo">
+                <a href="{{ url_for('paginadonovoitem') }}" class="btn-adicionar">+ Adicionar Item</a>
+                <a href="{{ url_for('excluir_todos') }}" class="btn-excluir-todos" onclick="return confirm('Tem certeza que deseja excluir todos os itens do estoque?');"> Excluir Todos</a>
+            </div>
+        </div>
+
+        <div class="tabela-container">
+            <table id="tabela">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Descrição</th>
+                        <th>Quantidade</th>
+                        <th>Preço</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for objeto in objetos %}
+                    <tr>
+                        <td><strong>{{ objeto[1] }}</strong></td>
+                        <td>{{ objeto[2] }}</td>
+                        <td>
+                            <span class="qtd-badge {% if objeto[3]|int < 5 %}qtd-baixa{% endif %}">
+                                {{ objeto[3] }} un
+                            </span>
+                        </td>
+                        <td>R$ {{ "%.2f"|format(objeto[4]|float) if objeto[4] is number else objeto[4] }}</td>
+                        <td>
+                            <a href="/excluir/{{ objeto[0] }}" onclick="return confirm('Deseja excluir o item {{ objeto[1] }}?');">
+                                <button class="btn-excluir-item">Excluir</button>
+                            </a>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr id="linhaVazia">
+                        <td colspan="5" style="padding: 30px; color: #666; text-align: center;">Nenhum item cadastrado no estoque no momento.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <script>
+        function filtrarTabela() {
+            let termo = document.getElementById("campoBusca").value.toLowerCase();
+            let linhas = document.querySelectorAll("#tabela tbody tr");
+
+            linhas.forEach(function(linha) {
+                if (linha.id === "linhaVazia") return;
+
+                let nome = linha.cells[0] ? linha.cells[0].innerText.toLowerCase() : "";
+                let descricao = linha.cells[1] ? linha.cells[1].innerText.toLowerCase() : "";
+
+                if (nome.includes(termo) || descricao.includes(termo)) {
+                    linha.style.display = "";
+                } else {
+                    linha.style.display = "none";
+                }
+            });
+        }
+    </script>
+</body>
+</html>

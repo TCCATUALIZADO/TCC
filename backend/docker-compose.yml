@@ -1,0 +1,43 @@
+# ========================================================
+# DOCKER COMPOSE - ORQUESTRAÇÃO DOS SERVIÇOS (FLASK + MYSQL)
+# ========================================================
+# Permite subir a aplicação inteira com o comando:
+# docker compose up --build
+# ========================================================
+
+services:
+  # SERVIÇO 1: BANCO DE DADOS MYSQL
+  db:
+    image: mysql:8.0
+    container_name: mysql_estoque
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: trabalho
+    ports:
+      - "3307:3306"
+    volumes:
+      # Executa automaticamente o script banco.sql na primeira inicialização
+      - ./banco.sql:/docker-entrypoint-initdb.d/init.sql
+      # Persiste os dados mesmo se os containers forem derrubados
+      - db_dados:/var/lib/mysql
+
+  # SERVIÇO 2: APLICAÇÃO WEB E API REST FLASK
+  web:
+    build: .
+    container_name: flask_estoque
+    restart: always
+    ports:
+      - "5000:5000"
+    environment:
+      # O Flask se conecta no serviço MySQL usando o nome 'db'
+      - DB_HOST=db
+      - DB_USER=root
+      - DB_PASSWORD=root
+      - DB_NAME=trabalho
+    depends_on:
+      - db
+
+# Volume compartilhado para guardar os dados do MySQL com segurança
+volumes:
+  db_dados:

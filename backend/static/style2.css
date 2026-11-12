@@ -1,0 +1,151 @@
+/* ========================================================
+   ESTILOS COMPARTILHADOS 2 - SISTEMA DE ALMOXARIFADO
+   Responsivo para Celular, Tablet, Notebook e Desktop
+   ======================================================== */
+
+:root {
+    --primary: #00437e;
+    --primary-hover: #002d54;
+    --bg-card: rgba(255, 255, 255, 0.96);
+    --border: #cbd5e1;
+    --radius-pill: 50px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    min-height: 100dvh;
+    background-image: url(img/tela2.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: #1e293b;
+}
+
+.voltar {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background-color: var(--primary);
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 10px 22px;
+    border: none;
+    border-radius: var(--radius-pill);
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 67, 126, 0.3);
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.voltar:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(0, 67, 126, 0.4);
+}
+
+.form-box {
+    background: var(--bg-card);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 30px;
+    width: 90%;
+    max-width: 450px;
+    margin: 30px auto;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+input {
+    width: 100%;
+    padding: 12px 16px;
+    margin: 8px 0 16px 0;
+    border: 2px solid var(--border);
+    border-radius: var(--radius-pill);
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+}
+
+input:focus {
+    border-color: var(--primary);
+}
+
+button {
+    padding: 12px 24px;
+    border-radius: var(--radius-pill);
+    background-color: var(--primary);
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+button:hover {
+    background-color: var(--primary-hover);
+}
+
+h1 {
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 12px 28px;
+    display: table;
+    font-size: clamp(22px, 3.5vw, 32px);
+    font-weight: 800;
+    color: var(--primary);
+    margin: 20px auto;
+    border-radius: var(--radius-pill);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    text-align: center;
+}
+
+.consulta5 {
+    width: 100%;
+    max-width: 450px;
+    height: 60px;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    border-radius: var(--radius-pill);
+    font-size: 18px;
+    font-weight: 700;
+    display: block;
+    margin: 20px auto;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(0, 67, 126, 0.35);
+    transition: all 0.25s ease;
+}
+
+.consulta5:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 67, 126, 0.45);
+}
+
+@media (max-width: 768px) {
+    .form-box {
+        padding: 22px 16px;
+    }
+
+    h1 {
+        font-size: 22px;
+        padding: 10px 20px;
+    }
+
+    .consulta5 {
+        height: 52px;
+        font-size: 16px;
+    }
+}

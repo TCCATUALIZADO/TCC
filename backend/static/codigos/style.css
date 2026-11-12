@@ -1,0 +1,455 @@
+/* ========================================================
+   ESTILOS RESPONSIVOS - SISTEMA DE ALMOXARIFADO (LOGIN)
+   Compatível com: Celular, Tablet, Notebook e Desktop
+   ======================================================== */
+
+:root {
+    --primary: #00437e;
+    --primary-hover: #002d54;
+    --primary-light: #005caa;
+    --accent: #28a745;
+    --bg-card: rgba(255, 255, 255, 0.95);
+    --text-color: #1a2a3a;
+    --border-color: #cbd5e1;
+    --shadow: 0 10px 30px rgba(0, 30, 60, 0.2);
+    --radius-pill: 50px;
+    --radius-card: 20px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    min-height: 100dvh;
+    background-image: url(img1/fundo.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    color: var(--text-color);
+}
+
+/* --- BARRA SUPERIOR (HEADER) --- */
+.top-bar {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    z-index: 10;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.25));
+    transition: transform 0.3s ease;
+}
+
+.logo:hover {
+    transform: scale(1.05);
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.logo-text h2 {
+    font-size: 20px;
+    color: var(--primary);
+    margin: 0;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.logo-text span {
+    font-size: 13px;
+    color: #4a5568;
+    font-weight: 500;
+}
+
+/* Botão Cadastre-se na Barra Superior */
+.botao {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary);
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 12px 28px;
+    border: none;
+    border-radius: var(--radius-pill);
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 67, 126, 0.3);
+    transition: all 0.3s ease;
+}
+
+.botao:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 67, 126, 0.4);
+}
+
+/* --- CONTAINER CENTRAL DE LOGIN --- */
+.login-main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 20px 0;
+}
+
+.login-card {
+    background: var(--bg-card);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    width: 100%;
+    max-width: 480px;
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow);
+    padding: 40px 35px;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.texto {
+    font-size: clamp(26px, 4vw, 36px);
+    color: var(--primary);
+    font-weight: 800;
+    line-height: 1.15;
+    margin: 0;
+}
+
+.texto2 {
+    font-size: clamp(22px, 3.5vw, 30px);
+    color: var(--primary-light);
+    font-weight: 700;
+    margin: 2px 0 10px 0;
+}
+
+.subtitulo {
+    font-size: 14px;
+    color: #64748b;
+    margin: 0;
+}
+
+/* --- CAMPOS DE ENTRADA (FORMULÁRIO) --- */
+.form-group {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.form-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #334155;
+    margin-bottom: 6px;
+    text-align: left;
+}
+
+.input-icon-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-icon {
+    position: absolute;
+    left: 18px;
+    font-size: 18px;
+    color: #64748b;
+    pointer-events: none;
+}
+
+.login, .senha {
+    width: 100%;
+    height: 54px;
+    padding: 12px 20px 12px 48px;
+    font-size: 16px;
+    color: #1e293b;
+    background-color: #ffffff;
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-pill);
+    outline: none;
+    transition: all 0.25s ease;
+    box-sizing: border-box;
+}
+
+.login:focus, .senha:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(0, 67, 126, 0.15);
+}
+
+.login::placeholder, .senha::placeholder {
+    color: #94a3b8;
+    font-size: 15px;
+}
+
+/* Campo de senha com botão de olho */
+.campo-senha {
+    position: relative;
+    width: 100%;
+}
+
+.campo-senha .senha {
+    padding-right: 50px;
+}
+
+.btn-toggle-senha {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    color: #64748b;
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: color 0.2s, background-color 0.2s;
+    user-select: none;
+}
+
+.btn-toggle-senha:hover {
+    color: var(--primary);
+    background-color: rgba(0, 67, 126, 0.08);
+}
+
+/* Botão Entrar */
+.botao2 {
+    width: 100%;
+    height: 54px;
+    background-color: var(--primary);
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 700;
+    border: none;
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(0, 67, 126, 0.35);
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.botao2:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 67, 126, 0.45);
+}
+
+.botao2:active {
+    transform: translateY(0);
+}
+
+/* Link de alternância (mobile/tablet) */
+.card-footer {
+    margin-top: 25px;
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid #e2e8f0;
+}
+
+.card-footer p {
+    font-size: 14px;
+    color: #64748b;
+    margin: 0;
+}
+
+.card-footer a {
+    color: var(--primary);
+    font-weight: 700;
+    text-decoration: none;
+    margin-left: 5px;
+    transition: color 0.2s;
+}
+
+.card-footer a:hover {
+    color: var(--primary-hover);
+    text-decoration: underline;
+}
+
+/* Rodapé inferior */
+.page-footer {
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.85);
+    padding: 10px 0;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+
+/* ========================================================
+   MEDIA QUERIES - RESPONSIVIDADE MULTIPLATAFORMA
+   ======================================================== */
+
+/* Notebooks e Desktops menores (1024px a 1366px) */
+@media (max-width: 1366px) {
+    .login-card {
+        max-width: 440px;
+        padding: 35px 30px;
+    }
+}
+
+/* Tablets (768px a 1023px) */
+@media (max-width: 1023px) {
+    .top-bar {
+        padding: 8px 10px;
+    }
+
+    .logo {
+        width: 70px;
+        height: 70px;
+    }
+
+    .login-card {
+        max-width: 420px;
+        padding: 30px 25px;
+    }
+}
+
+/* Celulares grandes e Phablets (481px a 767px) */
+@media (max-width: 767px) {
+    body {
+        padding: 12px;
+    }
+
+    .top-bar {
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
+
+    .logo {
+        width: 60px;
+        height: 60px;
+    }
+
+    .logo-text h2 {
+        font-size: 17px;
+    }
+
+    .botao {
+        font-size: 14px;
+        padding: 8px 18px;
+    }
+
+    .login-card {
+        padding: 25px 20px;
+        border-radius: 16px;
+    }
+
+    .login, .senha, .botao2 {
+        height: 48px;
+        font-size: 15px;
+    }
+}
+
+/* Celulares pequenos (até 480px) */
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+
+    .top-bar {
+        flex-direction: row;
+        gap: 10px;
+    }
+
+    .logo-text span {
+        display: none;
+    }
+
+    .logo-text h2 {
+        font-size: 15px;
+    }
+
+    .logo {
+        width: 50px;
+        height: 50px;
+    }
+
+    .botao {
+        font-size: 13px;
+        padding: 7px 14px;
+    }
+
+    .login-card {
+        padding: 22px 16px;
+        border-radius: 14px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    .card-header {
+        margin-bottom: 20px;
+    }
+
+    .texto {
+        font-size: 24px;
+    }
+
+    .texto2 {
+        font-size: 20px;
+    }
+
+    .login, .senha, .botao2 {
+        height: 46px;
+        font-size: 15px;
+    }
+
+    .input-icon {
+        left: 14px;
+        font-size: 16px;
+    }
+
+    .login, .senha {
+        padding-left: 42px;
+    }
+}

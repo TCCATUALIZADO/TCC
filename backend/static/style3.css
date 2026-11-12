@@ -1,0 +1,337 @@
+/* ========================================================
+   ESTILOS RESPONSIVOS - PÁGINA DE CADASTRO
+   Compatível com: Celular, Tablet, Notebook e Desktop
+   ======================================================== */
+
+:root {
+    --primary: #00437e;
+    --primary-hover: #002d54;
+    --primary-light: #005caa;
+    --success: #28a745;
+    --bg-card: rgba(255, 255, 255, 0.96);
+    --text-color: #1a2a3a;
+    --border-color: #cbd5e1;
+    --shadow: 0 10px 30px rgba(0, 30, 60, 0.25);
+    --radius-pill: 50px;
+    --radius-card: 20px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    min-height: 100dvh;
+    background-image: url(codigos/img1/fundo.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    color: var(--text-color);
+}
+
+/* Barra Superior */
+.top-nav {
+    width: 100%;
+    max-width: 1100px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px 0;
+    z-index: 10;
+}
+
+.btn-voltar {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: var(--primary);
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 10px 22px;
+    border-radius: var(--radius-pill);
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(0, 67, 126, 0.3);
+    transition: all 0.3s ease;
+}
+
+.btn-voltar:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(0, 67, 126, 0.4);
+}
+
+/* Área Central */
+.cadastro-main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 20px 0;
+}
+
+.cadastro-card {
+    background: var(--bg-card);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    width: 100%;
+    max-width: 500px;
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow);
+    padding: 40px 35px;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card-header {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.card-icon {
+    font-size: 40px;
+    margin-bottom: 8px;
+    display: inline-block;
+}
+
+.card-header h1 {
+    font-size: clamp(24px, 4vw, 32px);
+    color: var(--primary);
+    font-weight: 800;
+    margin-bottom: 6px;
+}
+
+.card-header p {
+    font-size: 14px;
+    color: #64748b;
+    margin: 0;
+}
+
+/* Formulário e Campos */
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #334155;
+    margin-bottom: 6px;
+    text-align: left;
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-icon {
+    position: absolute;
+    left: 16px;
+    font-size: 16px;
+    color: #64748b;
+    pointer-events: none;
+}
+
+.campo-input {
+    width: 100%;
+    height: 52px;
+    padding: 12px 18px 12px 46px;
+    font-size: 16px;
+    color: #1e293b;
+    background-color: #ffffff;
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-pill);
+    outline: none;
+    transition: all 0.25s ease;
+    box-sizing: border-box;
+}
+
+.campo-input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(0, 67, 126, 0.15);
+}
+
+.campo-input::placeholder {
+    color: #94a3b8;
+    font-size: 15px;
+}
+
+.input-wrapper .btn-toggle {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    font-size: 18px;
+    color: #64748b;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 50%;
+    transition: color 0.2s;
+    user-select: none;
+}
+
+.input-wrapper .btn-toggle:hover {
+    color: var(--primary);
+}
+
+/* Botão Cadastrar */
+.btn-cadastrar {
+    width: 100%;
+    height: 54px;
+    background-color: var(--primary);
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 700;
+    border: none;
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(0, 67, 126, 0.35);
+    transition: all 0.3s ease;
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-cadastrar:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 67, 126, 0.45);
+}
+
+.btn-cadastrar:active {
+    transform: translateY(0);
+}
+
+/* Rodapé do Card */
+.card-footer {
+    margin-top: 24px;
+    text-align: center;
+    padding-top: 18px;
+    border-top: 1px solid #e2e8f0;
+}
+
+.card-footer p {
+    font-size: 14px;
+    color: #64748b;
+    margin: 0;
+}
+
+.card-footer a {
+    color: var(--primary);
+    font-weight: 700;
+    text-decoration: none;
+    margin-left: 5px;
+}
+
+.card-footer a:hover {
+    color: var(--primary-hover);
+    text-decoration: underline;
+}
+
+/* Rodapé da página */
+.page-footer {
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.85);
+    padding: 10px 0;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+
+/* ========================================================
+   MEDIA QUERIES - RESPONSIVIDADE
+   ======================================================== */
+
+@media (max-width: 1024px) {
+    .cadastro-card {
+        max-width: 460px;
+        padding: 35px 28px;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 15px;
+    }
+
+    .cadastro-card {
+        padding: 28px 22px;
+        border-radius: 16px;
+    }
+
+    .campo-input, .btn-cadastrar {
+        height: 48px;
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+
+    .top-nav {
+        margin-bottom: 5px;
+    }
+
+    .btn-voltar {
+        font-size: 13px;
+        padding: 8px 16px;
+    }
+
+    .cadastro-card {
+        padding: 22px 16px;
+        border-radius: 14px;
+    }
+
+    .card-icon {
+        font-size: 32px;
+    }
+
+    .card-header h1 {
+        font-size: 22px;
+    }
+
+    .campo-input, .btn-cadastrar {
+        height: 46px;
+        font-size: 15px;
+    }
+
+    .campo-input {
+        padding-left: 40px;
+    }
+
+    .input-icon {
+        left: 14px;
+    }
+}
